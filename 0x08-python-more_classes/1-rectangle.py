@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Defines a Rectangle class."""
-
+# 1-rectangle.py
+# Eric Kwakye Boateng <boateng.eric44@gmail.com>
 class Rectangle:
     """Represent a rectangle."""
 
