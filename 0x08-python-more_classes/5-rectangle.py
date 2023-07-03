@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+# 5-rectangle.py
+# Boateng Eric Kwakye
 """Defines a Rectangle class."""
 
 
