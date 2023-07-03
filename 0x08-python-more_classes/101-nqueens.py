@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-# 101-nqueens.py
 # Eric Kwakye Boateng <boateng.eric44@gmail.com>
 """Solves the N-queens puzzle.
 
