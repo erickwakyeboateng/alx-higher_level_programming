@@ -1,48 +1,23 @@
 #!/usr/bin/python3
-# Lists all states from the database hbtn_0e_0_usa.
-# Usage: ./0-select_states.py <mysql username> \
-#                             <mysql password> \
-#                             <database name>
+""" Script that lists all states from the database hbtn_0e_0_usa """
 import MySQLdb
-import sys
+from sys import argv
 
-if __name__ == "__main__":
-    # Check if the correct number of command-line arguments is provided
-    if len(sys.argv) != 4:
-        print("Usage: {} <username> <password> <database>".format(sys.argv[0]))
-        sys.exit(1)
+# The code should not be executed when imported
+if __name__ == '__main__':
 
-    # Parse command-line arguments
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
+    # make a connection to the database
+    db = MySQLdb.connect(host="localhost", port=3306, user=argv[1],
+                         passwd=argv[2], db=argv[3])
 
-    try:
-        # Connect to MySQL server on localhost
-        db = MySQLdb.connect(
-            user=username,
-            passwd=password,
-            db=database,
-            host='localhost',
-            port=3306
-        )
+    # It gives us the ability to have multiple seperate working environments
+    # through the same connection to the database.
+    cur = db.cursor()
+    cur.execute("SELECT * FROM states")
 
-        # Create a cursor object to interact with the database
-        cursor = db.cursor()
-
-        # Execute the SQL query to retrieve states sorted by id
-        cursor.execute("SELECT * FROM states ORDER BY id")
-
-        # Fetch all the results
-        states = cursor.fetchall()
-
-        # Display the states
-        for state in states:
-            print(state)
-
-    except MySQLdb.Error as e:
-        print("Error: {}".format(e))
-    finally:
-        # Close the cursor and database connection
-        cursor.close()
-        db.close()
+    rows = cur.fetchall()
+    for i in rows:
+        print(i)
+    # Clean up process
+    cur.close()
+    db.close()
